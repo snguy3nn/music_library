@@ -8,6 +8,7 @@ const DisplaySongs = (props) => {
                 <th className="header">Title</th>
                 <th className="header">Album</th>
                 <th className="header">Artist</th>
+                <th className="header">Genre</th>
                 <th className="header">Release Date</th>
                 <th className="header">Options</th>
             </tr>
@@ -17,6 +18,7 @@ const DisplaySongs = (props) => {
                         <td>{song.title}</td>
                         <td>{song.album}</td>
                         <td>{song.artist}</td>
+                        <td>{song.genre}</td>
                         <td>{song.release_date}</td>
                         <td><button className="mr-2"
                             onClick={()=> this.deleteSong(song.id)} variant='danger'
