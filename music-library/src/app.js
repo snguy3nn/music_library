@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import DisplaySongs from './components/DisplaySongs';
+import SongForm from './components/SongForm';
+import SearchBar from './components/SearchBar';
+import MusicTable from './components/MusicTable';
 
 class App extends Component {
     state = {
@@ -8,16 +10,28 @@ class App extends Component {
     }
 
     componentDidMount(){
-        axios.get('http://127.0.0.1:8000/music/')
-        .then(response => {this.setState({
-            songs: response.data
-        })});
+        this.allSongs();
+    }
+
+    async allSongs(){
+        let response = await axios.get('http://127.0.0.1:8000/music/');
+        this.setState({
+            songs: response.data,
+        })
+    }
+
+    delete = (id) => {
+        axios.delete(`http://127.0.0.1:8000/music/${id}`)
+        .then(() => this.setState({ status: 'Delete succesful' }))
+        window.location.reload();
     }
 
     render () {
         return (
-            <div>
-                <DisplaySongs songs={this.state.songs} />
+            <div>  
+                <SongForm />
+                <SearchBar />
+                <MusicTable songs={this.state.songs} delete={this.delete} />
             </div>
         );
     }
