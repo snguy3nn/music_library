@@ -5,15 +5,18 @@ import SearchBar from './components/SearchBar';
 import MusicTable from './components/MusicTable';
 
 class App extends Component {
-    state = {
+    constructor(props) {
+        super(props);
+        this.state = {
         songs: []
+        }
     }
 
     componentDidMount(){
         this.allSongs();
     }
 
-    async allSongs(){
+    allSongs = async () => {
         let response = await axios.get('http://127.0.0.1:8000/music/');
         this.setState({
             songs: response.data,
