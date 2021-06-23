@@ -32,7 +32,7 @@ class App extends Component {
     render () {
         return (
             <div>  
-                <SongForm />
+                <SongForm songForm={this.songForm} />
                 <SearchBar />
                 <MusicTable songs={this.state.songs} delete={this.delete} />
             </div>
